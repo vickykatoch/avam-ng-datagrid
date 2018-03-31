@@ -1,0 +1,13 @@
+.my-container {
+  height: 100vh;
+  width : 100%;
+}
+.panel {
+  height: 40px;
+  background: gray;
+}
+.body {
+  overflow: auto;
+  /* height: 500px; */
+}
+

@@ -1,0 +1,16 @@
+:root {
+  --color1 : #1e2020;
+  --color2 : #4b4c4c;
+  --color3 : #5a5c5c;
+  --color4 : #7b7c7c;
+  --color5 : #999c9c;
+  --color6 : #dfdfdf;
+
+  --body-bg : var(--color1);
+  --body-fg : var(--color6);
+  --body-inv-bg : var(--color6);
+  --body-inv-fg : var(--color1);
+
+  --border-color : var(--color5);
+
+}

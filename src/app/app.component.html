@@ -1,0 +1,28 @@
+<div class="d-flex flex-column my-container">
+  <div class="panel flex-no-shrink">
+    <button (click)="change()">Change</button>
+  </div>
+  <div class="flex-fill body" cool-infinite-grid-container id="containerDiv">
+    <cool-infinite-grid [itemIterator]="myItemIterator" [itemHeight]="100" [itemWidth]="575" [itemSpace]="10">
+      <ng-template let-item>
+        <div style="text-align: center; height: 100%" [style.backgroundColor]="item.color">
+          {{ item.name }}
+          <button (click)="changeColor(item)">Change Color</button>
+        </div>
+      </ng-template>
+    </cool-infinite-grid>
+  </div>
+  <div class="d-flex panel flex-no-shrink">
+    <button (click)="add()">Create</button>
+    <div style="display: inline-block" #container></div>
+  </div>
+</div>
+<ng-template #tmpl let-item="item">
+  <span>{{item}}</span>
+</ng-template>
+<!-- <avam-grid class="d-flex flex-fill" [columns]="columns" [data]="data">
+    </avam-grid>
+
+    <my-grid class="d-flex flex-fill">
+
+    </my-grid> -->
