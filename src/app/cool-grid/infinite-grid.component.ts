@@ -14,7 +14,7 @@ import { fromEvent } from 'rxjs/observable/fromEvent';
 import { IIterator } from "./iterator.interface";
 import { ViewPort } from "./view-port.model";
 
-const VIEW_PORT_SIZE_MULTIPLIER = 1.5;
+const VIEW_PORT_SIZE_MULTIPLIER = 1.3;
 const VIEW_PORT_MOVE_BOUNDARY_MULTIPLIER = 0.4;
 const SCROLL_CONTAINER_ATTRIBUTE_NAME = "cool-infinite-grid-container";
 const MILLISECONDS_TO_WAIT_ON_SCROLLING_BEFORE_RENDERING = 10;
@@ -85,9 +85,6 @@ export class CoolInfiniteGridComponent implements OnInit {
     checkInjectedParameters();
     // debugger;
     this.scrollContainer = getScrollContainer();
-    // fromEvent(this.scrollContainer,'scroll').subscribe(x=> {
-    //   console.log(x);
-    // });
 
     this.scrollContainer.onscroll = this.onContainerScroll.bind(this);
 
@@ -321,10 +318,7 @@ export class CoolInfiniteGridComponent implements OnInit {
 
     this.destroyViewPort(oldBottomViewPort);
   }
-  update() {
-    debugger;
-    console.log(this.scrollContainer);
-  }
+
   private async moveDownAsync(scrollTop: number): Promise<void> {
     const viewPortScrollTop = this.bottomViewPort.bottomScrollTop;
     const fromIndex =

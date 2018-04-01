@@ -5,9 +5,10 @@ import {
   ElementRef,
   ViewContainerRef
 } from "@angular/core";
-import { GridColumn } from "./avam-grid";
+import { GridColumn, ItemIterator } from "./avam-grid";
 import { EmployeeBuilder } from "./data-builder";
 import { CoolInfiniteGridComponent } from "./cool-grid/infinite-grid.component";
+import { IIterator } from "./cool-grid/grid-module";
 
 @Component({
   selector: "app-root",
@@ -25,6 +26,7 @@ export class AppComponent {
   container;
   @ViewChild(CoolInfiniteGridComponent) grid;
 
+  dataIterator : ItemIterator<any>;
   tplData = [];
 
   constructor() {
@@ -57,6 +59,15 @@ export class AppComponent {
         };
       }
     };
+
+    this.dataIterator = {
+      next: (fromIndex,length) => {
+        return {
+          value: Promise.resolve(EmployeeBuilder.buildEmpData(length)),
+          done: false
+        };
+      }
+    }
   }
 
   changeColor(item) {
@@ -82,10 +93,10 @@ export class AppComponent {
   }
 
   ngOnInit() {
-    this.tplData = [{ item: "hello" }, { item: "World" }];
-    this.tplData.forEach(item => {
-      this.container.createEmbeddedView(this.rowTemplate, item);
-    });
+    // this.tplData = [{ item: "hello" }, { item: "World" }];
+    // this.tplData.forEach(item => {
+    //   this.container.createEmbeddedView(this.rowTemplate, item);
+    // });
   }
 
   add() {
@@ -93,16 +104,18 @@ export class AppComponent {
   }
   isFlashing = false;
   change() {
-    this.grid.update();
+    const item = this.data[0];
+    item.firstName = 'Balwinder';
+    // this.grid.update();
     this.isFlashing = !this.isFlashing;
-    // const handle = setInterval(() => {
-    //   const idx = Math.floor(Math.random() * 20);
-    //   const item = this.items[idx];
-    //   item.name = Math.floor(Math.random() * 1000);
-    //   item.color = "#" + (((1 << 24) * Math.random()) | 0).toString(16);
-    //   if(!this.isFlashing) {
-    //     clearInterval(handle);
-    //   }
-    // }, 50);
+    const handle = setInterval(() => {
+      const idx = Math.floor(Math.random() * 20);
+      const item = this.items[idx];
+      item.name = Math.floor(Math.random() * 1000);
+      item.color = "#" + (((1 << 24) * Math.random()) | 0).toString(16);
+      if(!this.isFlashing) {
+        clearInterval(handle);
+      }
+    }, 50);
   }
 }

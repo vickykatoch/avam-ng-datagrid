@@ -1,5 +1,5 @@
 .my-container {
-  height: 100vh;
+  height: 300px;
   width : 100%;
 }
 .panel {
@@ -8,6 +8,5 @@
 }
 .body {
   overflow: auto;
-  /* height: 500px; */
 }
 

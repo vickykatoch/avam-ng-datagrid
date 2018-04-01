@@ -11,22 +11,24 @@
 
 
   .av-header {
-    flex-shrink: 0;
-    display: flex;
+    position: absolute;
+    float: left;
     font-weight: bold;
     background: var(--color3);
   }
   .av-body {
+    clear: both;
     flex-grow: 1;
     overflow: auto;
   }
   .av-footer {
-    flex-shrink: 0;
+    position: absolute;
+    float: left;
     background: var(--color3);
   }
   .av-row {
     display: flex;
-    flex-direction: row;
+    flex-wrap: nowrap;
     line-height: 1.8em;
     &:hover {
       opacity: .7;

@@ -1,28 +1,25 @@
 <div class="avam-grid">
-  <div class="av-header">
+  <div class="av-header" #header>
     <div class="av-row">
       <div class="av-col" *ngFor="let column of columns" [style.width.px]="column.width">
         <avam-grid-header-column [model]="column"></avam-grid-header-column>
       </div>
     </div>
   </div>
-  <div class="av-body" >
+  <div class="av-body" #body>
     <div #vcr></div>
-    <!-- <div class="av-row" *ngFor="let row of data">
-      <ng-container [ngTemplateOutlet]="rowTemplate" [ngTemplateOutletContext]="{ row: row, columns: columns}"></ng-container>
-    </div> -->
   </div>
-  <div class="av-footer">
+  <!-- <div class="av-footer">
     FOOTER
-  </div>
+  </div> -->
 </div>
 
 <ng-template #rowTemplate let-row="row" let-columns="columns">
-  <div class="av-row">
-    <div class="av-col" *ngFor="let column of columns" [style.width.px]="column.width">
-      <avam-grid-column [value]="row[column.name]">
-
-      </avam-grid-column>
+  <div class="av-row" [style.width.px]="rowWidth">
+    <div class="av-col" *ngFor="let column of columns" [style.width.px]='column.width'>
+      {{row[column.name]}}
+      <!-- <avam-grid-column [value]="row[column.name]">
+      </avam-grid-column> -->
     </div>
   </div>
 </ng-template>
