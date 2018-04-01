@@ -1,12 +1,15 @@
 .my-container {
   height: 300px;
   width : 100%;
+  background: gray;
 }
 .panel {
   height: 40px;
   background: gray;
 }
 .body {
-  overflow: auto;
+  background: #fff;
+  color:#000;
+
 }
 

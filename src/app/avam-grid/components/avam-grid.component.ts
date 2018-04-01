@@ -135,7 +135,6 @@ export class AvamGridComponent implements OnInit {
   private onContainerScroll(evt: any) {
     const host = evt.target;
     if (host.scrollTop + host.clientHeight >= host.scrollHeight) {
-      // debugger;
       this.renderAsync(host.scrollTop);
       this.changeDetector.markForCheck();
       console.log("Bottom Reached");
@@ -203,7 +202,11 @@ export class AvamGridComponent implements OnInit {
   //#endregion
 
   private getItems(fromIndex: number, count: number): any[] {
-    console.log(`Data Slice from : ${fromIndex} to ${fromIndex + count}`);
+    debugger;
+    let lastIndex = (fromIndex + count)-1;
+    lastIndex = lastIndex>this.data.length ? this.data.length-1 : lastIndex;
+
+    console.log(`Data Slice from : ${fromIndex} to ${lastIndex}`);
     const slicedRefData = [];
     for (let i = 0; i < count; i++) {
       slicedRefData[i] = this.data[fromIndex+i];
