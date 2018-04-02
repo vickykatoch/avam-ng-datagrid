@@ -2,6 +2,19 @@
   <div class="panel flex-no-shrink">
     <button (click)="change()">Change</button>
   </div>
+  <div class="d-flex flex-fill body" avam-virtual-grid-container>
+    <avam-virtual-grid [itemIterator]="itemDataIterator"></avam-virtual-grid>
+  </div>
+  <div class="d-flex panel flex-no-shrink">
+    <button (click)="add()">Create</button>
+    <div style="display: inline-block" #container></div>
+  </div>
+</div>
+
+<!-- <div class="d-flex flex-column my-container">
+  <div class="panel flex-no-shrink">
+    <button (click)="change()">Change</button>
+  </div>
   <div class="d-flex flex-fill body" avam-grid-container id="containerDiv">
     <avam-grid class="d-flex flex-fill" [itemIterator]="dataIterator" [columns]="columns" [data]="data">
     </avam-grid>
@@ -10,7 +23,7 @@
     <button (click)="add()">Create</button>
     <div style="display: inline-block" #container></div>
   </div>
-</div>
+</div> -->
 
 
 <!-- <div class="d-flex flex-column my-container">

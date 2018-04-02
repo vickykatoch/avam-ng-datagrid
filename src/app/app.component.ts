@@ -6,16 +6,38 @@ import {
   ViewContainerRef
 } from "@angular/core";
 import { GridColumn, ItemIterator } from "./avam-grid";
-import { EmployeeBuilder } from "./data-builder";
+import { EmployeeBuilder, Emp } from "./data-builder";
 import { CoolInfiniteGridComponent } from "./cool-grid/infinite-grid.component";
 import { IIterator } from "./cool-grid/grid-module";
+import { DataItemIterator, IteratedItem } from "./avam-virtual-grid";
+
+class DataIterator implements DataItemIterator<any> {
+  private data : any[] = [];
+  constructor() {
+    this.data = EmployeeBuilder.buildEmpData(103);
+  }
+  next(from: number, count: number): IteratedItem<any> {
+    let toIndex = from + count;
+    let done = false;
+    if(toIndex  >= this.data.length) {
+      toIndex = this.data.length;
+      done = true;
+    }
+    console.log(`Fetching data from : [${from}] to : [${toIndex}]`);
+    const values = this.data.slice(from, toIndex);
+    return {
+      value : Promise.resolve(values),
+      done
+    };
+  }
+}
 
 @Component({
   selector: "app-root",
   templateUrl: "./app.component.html",
   styleUrls: ["./app.component.css"]
 })
-export class AppComponent {
+export class AppComponent  {
   title = "app";
   myItemIterator;
   items = [];
@@ -27,11 +49,12 @@ export class AppComponent {
   @ViewChild(CoolInfiniteGridComponent) grid;
 
   dataIterator : ItemIterator<any>;
+  itemDataIterator : DataIterator = new DataIterator();
   tplData = [];
 
   constructor() {
     this.createColumns();
-    this.data = EmployeeBuilder.buildEmpData(100);
+    this.data.push(...EmployeeBuilder.buildEmpData(100));
 
     for (let i = 0; i < 20000; i++) {
       this.items.push({
@@ -104,18 +127,23 @@ export class AppComponent {
   }
   isFlashing = false;
   change() {
-    const item = this.data[0];
-    item.firstName = 'Balwinder';
+    
+    const items = this.itemDataIterator['data'] as any[];
+    items[0].firstName= 'Balwinder';
+   
+    // item.firstName = 'Balwinder';
     // this.grid.update();
-    this.isFlashing = !this.isFlashing;
-    const handle = setInterval(() => {
-      const idx = Math.floor(Math.random() * 20);
-      const item = this.items[idx];
-      item.name = Math.floor(Math.random() * 1000);
-      item.color = "#" + (((1 << 24) * Math.random()) | 0).toString(16);
-      if(!this.isFlashing) {
-        clearInterval(handle);
-      }
-    }, 50);
+    // this.isFlashing = !this.isFlashing;
+    // const handle = setInterval(() => {
+    //   const idx = Math.floor(Math.random() * 20);
+    //   const item = this.items[idx];
+    //   item.name = Math.floor(Math.random() * 1000);
+    //   item.color = "#" + (((1 << 24) * Math.random()) | 0).toString(16);
+    //   if(!this.isFlashing) {
+    //     clearInterval(handle);
+    //   }
+    // }, 50);
   }
 }
+
+
