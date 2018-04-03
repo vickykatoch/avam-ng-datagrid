@@ -1,11 +1,14 @@
-<div class="avam-virtual-grid">
-  <div style="height:25px;background:red">Header</div>
-  <div class="body">
-      <div #vcr></div>
+<div class="avm-virtual-grid">
+  <div class="avm-grid-header" #gridHeader>
+    <div class="av-row">
+      <div class="av-col" *ngFor="let column of columns" [style.width.px]="column.width">
+        {{column.caption}}
+      </div>
+    </div>
   </div>
-  
+  <div class="avm-grid-body" #gridBody>
+    <grid-content [itemIterator]="itemIterator" [columns]="columns"></grid-content>
+  </div>
 </div>
 
-<ng-template #rowTemplate let-item="item">
-  <div style="display:block">{{item.firstName}}</div>
-</ng-template>
+

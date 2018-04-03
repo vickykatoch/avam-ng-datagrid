@@ -1,10 +1,12 @@
-import { Component, OnInit, Input, ChangeDetectionStrategy, ElementRef, ViewContainerRef, ViewChild, TemplateRef } from '@angular/core';
-import { DataItemIterator, PageView } from './models';
+import { Component, OnInit, Input,Renderer2,EventEmitter, ChangeDetectionStrategy,ChangeDetectorRef, ElementRef, ViewContainerRef, ViewChild, TemplateRef, RendererStyleFlags2, Output } from '@angular/core';
+import { DataItemIterator, GridColumn, GridApi } from './models';
 
 
-const GRID_PARENT_ELEM_ATTRIB_NAME = 'avam-virtual-grid-container';
+const GRID_PARENT_ELEM_ATTRIB_NAME = 'avm-virtual-grid-container';
 const NEXT_ROWSET_SIZE = 5;
 
+const HEADER_ROW_HEIGHT = 28;
+const BODY_ROW_HEIGHT = 25;
 
 @Component({
   selector: 'avam-virtual-grid',
@@ -16,8 +18,11 @@ export class AvamVirtualGridComponent implements OnInit {
 
   //#region Private Fields
   @ViewChild('rowTemplate') rowTemplate: TemplateRef<any>;
+  @ViewChild('gridBody') gridBody : ElementRef;
+  @ViewChild('gridHeader') gridHeader : ElementRef;
+  private gridApi = new GridApi();
   private gridParentElem: HTMLElement;
-  private pageView: PageView;
+
   //#endregion
 
   //#region Public Fields
@@ -25,10 +30,12 @@ export class AvamVirtualGridComponent implements OnInit {
 
   //#region External Input/Output
   @Input() itemIterator: DataItemIterator<any[]>;
+  @Input() columns: GridColumn[] = [];
+  @Output() initialized = new EventEmitter<GridApi>();
   //#endregion
 
   //#region ctor
-  constructor(private hostElem: ElementRef, private viewContainer: ViewContainerRef) {
+  constructor(private hostElem: ElementRef,private renderer: Renderer2, private changeDetector: ChangeDetectorRef) {
 
   }
   //#endregion
@@ -37,37 +44,12 @@ export class AvamVirtualGridComponent implements OnInit {
   async ngOnInit(): Promise<any> {
     this.validateInput();
     this.gridParentElem = this.findParentElement();
-    await this.initialRenderAsync();
-
-  }
-  //#endregion
-
-  //#region Rendering Helpers
-  async initialRenderAsync() {
-    await this.reRenderFromScrollAsync(0);
-  }
-  private async reRenderFromScrollAsync(scrollTop: number): Promise<void> {
-    const items = await this.fetchItems(0, 50);
-    this.pageView = this.pageView || new PageView();
-    this.pageView.items.push(...items);
-    this.pageView.items.forEach(item => {
-      const row = this.rowTemplate.createEmbeddedView({ item: item });
-      this.pageView.renderedItems.push(row);
-      this.viewContainer.insert(row);
+    this.setGridDimensions();
+    this.initialized.next(this.gridApi);
+    this.gridApi.refreshed.subscribe(x=> {
+      this.changeDetector.markForCheck();
     });
-    
-  }
-  //#endregion
-
-  //#region Data Methods
-  private async fetchItems(startIndex: number, length: number): Promise<any[]> {
-    const data = [];
-    const result = this.itemIterator.next(startIndex, length);
-    if (result.value instanceof Promise) {
-      return await result.value;
-    } else if (result.value instanceof Array) {
-      return result.value;
-    }
+    this.gridBody.nativeElement.onscroll = this.onContainerScroll.bind(this);
   }
   //#endregion
 
@@ -95,6 +77,18 @@ export class AvamVirtualGridComponent implements OnInit {
     parent.setAttribute(GRID_PARENT_ELEM_ATTRIB_NAME, "true");
     return parent;
   }
+  private setGridDimensions() {
+    const height = this.gridParentElem.clientHeight - HEADER_ROW_HEIGHT;
+    const width = this.gridParentElem.clientWidth;
+    this.renderer.setStyle(this.gridBody.nativeElement, 'margin-top',`${HEADER_ROW_HEIGHT}px`, RendererStyleFlags2.Important);
+    this.renderer.setStyle(this.gridBody.nativeElement, 'height',`${height}px`, RendererStyleFlags2.Important);
+  }
   //#endregion
 
+  //#region Event Handlers
+  private onContainerScroll(evt: Event) {
+    const position = +evt.target['scrollLeft'];
+    this.renderer.setStyle(this.gridHeader.nativeElement,'left',`${-position}px`);
+  }
+  //#endregion
 }

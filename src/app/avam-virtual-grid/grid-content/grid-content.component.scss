@@ -1,0 +1,15 @@
+.av-row {
+  display: block;
+  white-space: nowrap;
+  line-height: 1.8em;
+  &:hover {
+    opacity: 0.7;
+  }
+  .av-col {
+    display: inline-block;
+    border-right: 1px solid var(--border-color);
+  }
+}
+.av-row:nth-child(even) {
+  background-color: var(--color4);
+}

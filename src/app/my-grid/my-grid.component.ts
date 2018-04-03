@@ -38,7 +38,6 @@ export class MyGridComponent implements OnInit {
   }
   private setHostDimensions() {
     const hostHeight = this.hostParent.clientHeight;
-    // this.gridWrapper.nativeElement.style.width = `${this.hostParent.clientWidth}px`;
     this.gridWrapper.nativeElement.style.height = `${hostHeight}px`;
     this.headerHost.nativeElement.style.height = `30px`;
     this.contentHost.nativeElement.style.height = `${hostHeight-30}px`;

@@ -1,0 +1,9 @@
+<div class="avm-page-view"></div>
+
+<ng-template #rowTemplate let-item="item" let-columns="columns">
+  <div class="av-row" [style.width.px]="rowWidth">
+    <div class="av-col" *ngFor="let column of columns" [style.width.px]='column.width'>
+      {{item[column.name]}}
+    </div>
+  </div>
+</ng-template>

@@ -1,4 +1,36 @@
-:host {
+.avm-virtual-grid {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  overflow: hidden;
+
+
+  .avm-grid-header {
+    font-weight: bold;
+    float: left;
+    position: absolute;
+    white-space: nowrap;
+    overflow: hidden;
+    user-select: none;
+    cursor: pointer;
+  }
+  .avm-grid-body {
     display: block;
-    position: relative;
+    font-weight: normal;
+    white-space: nowrap;
+    overflow: auto;
+  }
+
+  .av-row {
+    display: block;
+    white-space: nowrap;
+    line-height: 1.8em;
+
+    .av-col {
+      display: inline-block;
+      border-right: 1px solid var(--border-color);
+    }
+  }
+
 }

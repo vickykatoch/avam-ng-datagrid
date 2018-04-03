@@ -9,10 +9,11 @@ import { GridColumn, ItemIterator } from "./avam-grid";
 import { EmployeeBuilder, Emp } from "./data-builder";
 import { CoolInfiniteGridComponent } from "./cool-grid/infinite-grid.component";
 import { IIterator } from "./cool-grid/grid-module";
-import { DataItemIterator, IteratedItem } from "./avam-virtual-grid";
+import { DataItemIterator, IteratedItem, GridApi } from "./avam-virtual-grid";
 
 class DataIterator implements DataItemIterator<any> {
   private data : any[] = [];
+
   constructor() {
     this.data = EmployeeBuilder.buildEmpData(103);
   }
@@ -40,6 +41,7 @@ class DataIterator implements DataItemIterator<any> {
 export class AppComponent  {
   title = "app";
   myItemIterator;
+  private gridApi : GridApi;
   items = [];
   columns: GridColumn[] = [];
   data = [];
@@ -121,28 +123,32 @@ export class AppComponent  {
     //   this.container.createEmbeddedView(this.rowTemplate, item);
     // });
   }
-
+  onGridInitialized(api: GridApi) {
+    this.gridApi=api;
+  }
   add() {
     this.tplData[0] = { item: "bye" };
   }
   isFlashing = false;
   change() {
-    
+
     const items = this.itemDataIterator['data'] as any[];
-    items[0].firstName= 'Balwinder';
-   
+    // items[0].firstName= 'Balwinder';
+    // this.gridApi.refresh();
     // item.firstName = 'Balwinder';
     // this.grid.update();
-    // this.isFlashing = !this.isFlashing;
-    // const handle = setInterval(() => {
-    //   const idx = Math.floor(Math.random() * 20);
-    //   const item = this.items[idx];
-    //   item.name = Math.floor(Math.random() * 1000);
-    //   item.color = "#" + (((1 << 24) * Math.random()) | 0).toString(16);
-    //   if(!this.isFlashing) {
-    //     clearInterval(handle);
-    //   }
-    // }, 50);
+    this.isFlashing = !this.isFlashing;
+    // debugger;
+    const handle = setInterval(() => {
+      const idx = Math.floor(Math.random() * 50);
+      const item = items[idx];
+      item.firstName = `FIRST NAME ${Math.floor(Math.random() * 1000)}`;
+      item.lastName = `Last NAME ${Math.floor(Math.random() * 1000)}`;
+      this.gridApi.refresh();
+      if(!this.isFlashing) {
+        clearInterval(handle);
+      }
+    }, 50);
   }
 }
 
