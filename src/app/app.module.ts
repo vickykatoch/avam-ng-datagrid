@@ -7,19 +7,22 @@ import { MyGridComponent } from './my-grid/my-grid.component';
 import { AvamGridModule } from './avam-grid';
 import { AvamVirtualGridComponent } from './avam-virtual-grid/avam-virtual-grid.component';
 import { GridContentComponent } from './avam-virtual-grid/grid-content/grid-content.component';
-
+import {ColorPickerModule} from './color-picker';
+import { PieChartComponent } from './pie-chart/pie-chart.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MyGridComponent,
     AvamVirtualGridComponent,
-    GridContentComponent
+    GridContentComponent,
+    PieChartComponent
   ],
   imports: [
     BrowserModule,
     CoolInfiniteGridModule,
-    AvamGridModule
+    AvamGridModule,
+    ColorPickerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -40,6 +40,7 @@ class DataIterator implements DataItemIterator<any> {
 })
 export class AppComponent  {
   title = "app";
+  color = '#2883e9';
   myItemIterator;
   private gridApi : GridApi;
   items = [];

@@ -6,15 +6,23 @@
     <div class="flex-fill" avm-virtual-grid-container style="border-right: 1px solid">
       <avam-virtual-grid (initialized)="onGridInitialized($event)" [itemIterator]="itemDataIterator" [columns]="columns"></avam-virtual-grid>
     </div>
-    <div class="flex-fill" avm-virtual-grid-container>
+    <!-- <div class="flex-fill" avm-virtual-grid-container>
       <avam-virtual-grid (initialized)="onGridInitialized($event)" [itemIterator]="itemDataIterator" [columns]="columns"></avam-virtual-grid>
-    </div>
+    </div> -->
+
   </div>
 
   <div class="d-flex panel flex-no-shrink">
     <button (click)="add()">Create</button>
     <div style="display: inline-block" #container></div>
+    <div class="d-flex ml-2">
+        <input [(colorPicker)]="color" [style.background]="color"/>
+    </div>
   </div>
+</div>
+<div class="d-flex flex-column my-container">
+    <app-pie-chart>
+      </app-pie-chart>
 </div>
 
 <!-- <div class="my-container d-flex flex-column">

@@ -1,0 +1,14 @@
+:host {
+  margin: 50px 100px;
+  border: 1px solid;
+  width: 170px;
+  background: var(--body-bg);
+
+  .chart {
+    padding: 5px;
+  }
+  .legend {
+    border-top: 1px solid;
+    font-size: 0.8rem;
+  }
+}

@@ -1,0 +1,10 @@
+<div class="d-flex flex-column" [style.width.px]="width">
+  <div class="chart">
+    <canvas #chartCanvas>
+
+    </canvas>
+  </div>
+  <div class="d-flex">
+    <div class="flex-fill flex-wrap legend" *ngFor="let item of pieModel" [style.backgroundColor]="item.color">{{item.key}}</div>
+  </div>
+</div>
