@@ -3,13 +3,27 @@
     <button (click)="change()">Change</button>
   </div>
   <div class="d-flex flex-fill body">
+    <div class="flex-fill" style="margin-left : 50px; margin-top: 50px;">
+      <app-pie-chart>
+      </app-pie-chart>
+    </div>
+  </div>
+
+  <div class="d-flex panel flex-no-shrink">
+    <button (click)="add()">Create</button>
+    <div style="display: inline-block" #container></div>
+
+  </div>
+</div>
+
+<!-- <div class="d-flex flex-column my-container">
+  <div class="panel flex-no-shrink">
+    <button (click)="change()">Change</button>
+  </div>
+  <div class="d-flex flex-fill body">
     <div class="flex-fill" avm-virtual-grid-container style="border-right: 1px solid">
       <avam-virtual-grid (initialized)="onGridInitialized($event)" [itemIterator]="itemDataIterator" [columns]="columns"></avam-virtual-grid>
     </div>
-    <!-- <div class="flex-fill" avm-virtual-grid-container>
-      <avam-virtual-grid (initialized)="onGridInitialized($event)" [itemIterator]="itemDataIterator" [columns]="columns"></avam-virtual-grid>
-    </div> -->
-
   </div>
 
   <div class="d-flex panel flex-no-shrink">
@@ -19,11 +33,8 @@
         <input [(colorPicker)]="color" [style.background]="color"/>
     </div>
   </div>
-</div>
-<div class="d-flex flex-column my-container">
-    <app-pie-chart>
-      </app-pie-chart>
-</div>
+</div> -->
+
 
 <!-- <div class="my-container d-flex flex-column">
   <div class="panel flex-no-shrink">Header</div>
