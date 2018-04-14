@@ -9,6 +9,7 @@ import { AvamVirtualGridComponent } from './avam-virtual-grid/avam-virtual-grid.
 import { GridContentComponent } from './avam-virtual-grid/grid-content/grid-content.component';
 import {ColorPickerModule} from './color-picker';
 import { PieChartComponent } from './pie-chart/pie-chart.component';
+import { FxwidgetComponent } from './fxwidget/fxwidget.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { PieChartComponent } from './pie-chart/pie-chart.component';
     MyGridComponent,
     AvamVirtualGridComponent,
     GridContentComponent,
-    PieChartComponent
+    PieChartComponent,
+    FxwidgetComponent
   ],
   imports: [
     BrowserModule,

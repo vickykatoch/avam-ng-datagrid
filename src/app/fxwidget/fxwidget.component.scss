@@ -1,0 +1,133 @@
+.fx-widget {
+  $WIDGET-WIDTH : 260px;
+  position: relative;
+  border: 1px solid;
+  margin-left:30px;
+  margin-bottom: 5px;
+  min-width: $WIDGET-WIDTH;
+  color: #fff;
+  font-size: 0.8rem;
+
+  .enlarged-row {
+    height: 50px;
+    border-bottom: 1px solid;
+  }
+
+  .xl-price {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5px;
+  }
+
+  .enlarged-price {
+    font-size: 3em;
+    font-weight: bold;
+    line-height: 50px;
+  }
+  .normal-price {
+    font-size: 1.2em;
+  }
+  .b-bid {
+    position: relative;
+    border-right: 1px solid;
+    background: linear-gradient(
+      to right,
+      #3773ff,
+      #3d41ff,
+      #2d32ff,
+      #0037ab,
+      #002472
+    );
+    .bb-xl-price {
+      @extend .xl-price;
+      padding-right: 10px;
+    }
+    .bb-qty {
+      position: absolute;
+      border-bottom-left-radius: 5px;
+      right: 0;
+      top: 0;
+      padding: 0 3px;
+      font-size: 1.2em;
+      border-left: 1px solid;
+      border-bottom: 1px solid;
+    }
+    .high {
+      position: absolute;
+      font-size: 0.8em;
+      left: 0;
+      top: -2px;
+    }
+  }
+  .b-ask {
+    position: relative;
+    background: linear-gradient(
+      to right,
+      #6d0202,
+      #8d0606,
+      #b00e0e,
+      #d61313,
+      #f22323
+    );
+    .ba-qty {
+      padding: 0 3px;
+      border-bottom-right-radius: 5px;
+      position: absolute;
+      font-size: 1.2em;
+      left: 0;
+      top: 0;
+      border-right: 1px solid;
+      border-bottom: 1px solid;
+    }
+    .ba-xl-price {
+      @extend .xl-price;
+      padding-left: 10px;
+    }
+    .low {
+      position: absolute;
+      font-size: 0.8em;
+      right: 0;
+      top: -2px;
+    }
+  }
+
+
+
+  /******************/
+  .no-gutters {
+    padding: 0;
+    margin: 0;
+  }
+  .col {
+    border-right: 1px solid;
+  }
+  .col:last-child {
+    border-right: none;
+  }
+  .row {
+    border-bottom: 1px solid;
+  }
+  .row:last-child {
+    border-bottom: none;
+  }
+  .title {
+    position: absolute;
+    left:-25px;
+    bottom:100%;
+    top:-26px;
+    height:25px;
+    padding-left:3px;
+    width: 150px;
+    z-index:5;
+    font-weight: bold;
+    font-size:1.2em;
+    background: green;
+    border:1px solid;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+  }
+  .rotate {
+    transform: rotate(90deg);
+    transform-origin: 0 100%;
+  }
+}
