@@ -1,0 +1,14 @@
+.fx-widget-host {
+  $MIN-WIDTH : 250px;
+  $MAX-WIDTH : 350PX;
+
+  .widget {
+    min-width: $MIN-WIDTH;
+    max-width: $MAX-WIDTH;
+    margin-left:2px;
+    margin-right:2px;
+    margin-bottom: 4px;
+    flex-shrink: 0;
+  }
+
+}

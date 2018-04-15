@@ -1,16 +1,16 @@
 .fx-widget {
-  $WIDGET-WIDTH : 260px;
+  $WIDGET-WIDTH : 210px;
   position: relative;
-  border: 1px solid;
-  margin-left:30px;
-  margin-bottom: 5px;
+  border: 1px solid var(--border-color);
+  margin-left:25px;
+  // margin-bottom: 5px;
   min-width: $WIDGET-WIDTH;
   color: #fff;
   font-size: 0.8rem;
 
   .enlarged-row {
     height: 50px;
-    border-bottom: 1px solid;
+    border-bottom: 1px solid var(--border-color);
   }
 
   .xl-price {
@@ -25,11 +25,12 @@
     line-height: 50px;
   }
   .normal-price {
-    font-size: 1.2em;
+    font-size: 1.1em;
+    font-weight: bold;
   }
   .b-bid {
     position: relative;
-    border-right: 1px solid;
+    border-right: 1px solid var(--border-color);
     background: linear-gradient(
       to right,
       #3773ff,
@@ -44,13 +45,13 @@
     }
     .bb-qty {
       position: absolute;
-      border-bottom-left-radius: 5px;
+      border-bottom-left-radius: 8px;
       right: 0;
       top: 0;
       padding: 0 3px;
       font-size: 1.2em;
-      border-left: 1px solid;
-      border-bottom: 1px solid;
+      border-left: 1px solid var(--border-color);
+      border-bottom: 1px solid var(--border-color);
     }
     .high {
       position: absolute;
@@ -71,13 +72,13 @@
     );
     .ba-qty {
       padding: 0 3px;
-      border-bottom-right-radius: 5px;
+      border-bottom-right-radius: 8px;
       position: absolute;
       font-size: 1.2em;
       left: 0;
       top: 0;
-      border-right: 1px solid;
-      border-bottom: 1px solid;
+      border-right: 1px solid var(--border-color);
+      border-bottom: 1px solid var(--border-color);
     }
     .ba-xl-price {
       @extend .xl-price;
@@ -99,13 +100,13 @@
     margin: 0;
   }
   .col {
-    border-right: 1px solid;
+    border-right: 1px solid var(--border-color);
   }
   .col:last-child {
     border-right: none;
   }
   .row {
-    border-bottom: 1px solid;
+    border-bottom: 1px solid var(--border-color);
   }
   .row:last-child {
     border-bottom: none;
@@ -122,8 +123,8 @@
     font-weight: bold;
     font-size:1.2em;
     background: green;
-    border:1px solid;
-    border-bottom-left-radius: 8px;
+    border:1px solid var(--border-color);
+    // border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
   }
   .rotate {
