@@ -1,55 +1,75 @@
-<div class="d-flex flex-column fx-widget" #container>
-  <div class="title rotate" [style.width.px]="width">
-    5 YEAR
-  </div>
-  <div class="d-flex flex-fill enlarged-row">
-    <div class="d-flex flex-fill b-bid justify-content-center">
-      <div class="bb-xl-price">
-        <span class="normal-price">99-</span>
-        <span class="enlarged-price">03+</span>
-      </div>
-      <div class="bb-qty">23</div>
-      <div class="high">High : 101.45</div>
-    </div>
-    <div class="d-flex justify-content-center flex-fill b-ask">
-      <div class="ba-xl-price">
-        <span class="normal-price">99-</span>
-        <span class="enlarged-price">03+</span>
-      </div>
-      <div class="ba-qty">23</div>
-      <div class="low">Low : 99.45</div>
-    </div>
-  </div>
-  <div class="container-fluid no-gutters">
-    <div class="row no-gutters">
-      <div class="col text-center no-gutters">1</div>
-      <div class="col text-center no-gutters">2</div>
-      <div class="col text-center no-gutters">3</div>
-      <div class="col text-center no-gutters">4</div>
-    </div>
-    <div class="row no-gutters">
-      <div class="col text-center no-gutters">1</div>
-      <div class="col text-center no-gutters">2</div>
-      <div class="col text-center no-gutters">3</div>
-      <div class="col text-center no-gutters">4</div>
-    </div>
-    <div class="row no-gutters">
-      <div class="col text-center no-gutters">1</div>
-      <div class="col text-center no-gutters">2</div>
-      <div class="col text-center no-gutters">3</div>
-      <div class="col text-center no-gutters">4</div>
-    </div>
-    <div class="row no-gutters">
-      <div class="col text-center no-gutters">1</div>
-      <div class="col text-center no-gutters">2</div>
-      <div class="col text-center no-gutters">3</div>
-      <div class="col text-center no-gutters">4</div>
-    </div>
-    <div class="row no-gutters">
-      <div class="col text-center no-gutters">1</div>
-      <div class="col text-center no-gutters">2</div>
-      <div class="col text-center no-gutters">3</div>
-      <div class="col text-center no-gutters">4</div>
-    </div>
-  </div>
+<div class="fx-widget" #container>
+  <ng-container *ngTemplateOutlet="enlargedTemplate">
+  </ng-container>
 </div>
+
+
+
+<ng-template #enlargedTemplate>
+  <div class="d-flex flex-column" >
+    <div class="d-flex title rotate" [style.width.px]="width">
+      <span class="flex-fill">5 YEAR</span>
+      <div class="d-flex justify-content-end">
+        <span>
+          <i class="fa fa-cog mr-2"></i>
+        </span>
+        <span>
+          <i class="fa fa-times"></i>
+        </span>
+      </div>
+    </div>
+    <div class="container-fluid no-gutters">
+      <div class="row no-gutters" *ngFor="let item of data; let isFirst = first">
+        <ng-container [ngSwitch]="isFirst">
+          <ng-container *ngSwitchCase="true">
+            <ng-container *ngTemplateOutlet="enlargedDataRowTemplate; context: {rowItem: item}"></ng-container>
+          </ng-container>
+          <ng-container *ngSwitchCase="false">
+            <ng-container *ngTemplateOutlet="normalDataRowTemplate; context: {rowItem: item}"></ng-container>
+          </ng-container>
+        </ng-container>
+      </div>
+    </div>
+    <div class="overlay">
+      52542
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #enlargedDataRowTemplate>
+  <div class="col">
+    <div class="d-flex flex-fill enlarged-row">
+      <div class="d-flex flex-fill b-bid justify-content-center">
+        <div class="bb-xl-price">
+          <span class="normal-price">99-</span>
+          <span class="enlarged-price">03+</span>
+        </div>
+
+        <div class="bb-qty">23</div>
+        <div class="high">
+          <span>High : 101.45</span>
+          <span class="enl-initials">BCK</span>
+        </div>
+      </div>
+      <div class="d-flex justify-content-center flex-fill b-ask">
+        <div class="ba-xl-price">
+          <span class="normal-price">99-</span>
+          <span class="enlarged-price">03+</span>
+        </div>
+        <div class="ba-qty">23</div>
+        <div class="low">
+          <span class="enl-initials">WN</span>
+          <span>Low : 99.45</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+<ng-template #normalDataRowTemplate let-rowItem="rowItem">
+  <div class="col text-center no-gutters">{{rowItem.baggQty}}</div>
+  <div class="col text-center no-gutters">{{rowItem.bqty}}</div>
+  <div class="col text-center no-gutters">{{rowItem.bb}}</div>
+  <div class="col text-center no-gutters">{{rowItem.ba}}</div>
+  <div class="col text-center no-gutters">{{rowItem.aaggQty}}</div>
+  <div class="col text-center no-gutters">{{rowItem.aqty}}</div>
+</ng-template>

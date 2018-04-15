@@ -1,16 +1,41 @@
 .fx-widget {
   $WIDGET-WIDTH : 210px;
+  $TITLE-HEIGHT : 22px;
+  user-select: none;
   position: relative;
   border: 1px solid var(--border-color);
-  margin-left:25px;
+  margin-left:$TITLE-HEIGHT;
   // margin-bottom: 5px;
   min-width: $WIDGET-WIDTH;
   color: #fff;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
 
   .enlarged-row {
     height: 50px;
-    border-bottom: 1px solid var(--border-color);
+
+    .enl-initials {
+      border-left : 1px solid var(--border-color);
+      border-right : 1px solid var(--border-color);
+      border-bottom : 1px solid var(--border-color);
+      font-size: 0.6rem;
+      font-weight: bold;
+      padding: 0 2px;
+      background: maroon;
+    }
+    .low {
+      position: absolute;
+      font-size: 0.8em;
+      right: 0;
+      top: -2px;
+      margin-right: 2px;
+    }
+    .high {
+      position: absolute;
+      font-size: 0.8em;
+      left: 0;
+      top: -2px;
+      margin-left: 2px;
+    }
   }
 
   .xl-price {
@@ -43,6 +68,7 @@
       @extend .xl-price;
       padding-right: 10px;
     }
+
     .bb-qty {
       position: absolute;
       border-bottom-left-radius: 8px;
@@ -53,12 +79,7 @@
       border-left: 1px solid var(--border-color);
       border-bottom: 1px solid var(--border-color);
     }
-    .high {
-      position: absolute;
-      font-size: 0.8em;
-      left: 0;
-      top: -2px;
-    }
+
   }
   .b-ask {
     position: relative;
@@ -84,12 +105,7 @@
       @extend .xl-price;
       padding-left: 10px;
     }
-    .low {
-      position: absolute;
-      font-size: 0.8em;
-      right: 0;
-      top: -2px;
-    }
+
   }
 
 
@@ -108,27 +124,36 @@
   .row {
     border-bottom: 1px solid var(--border-color);
   }
+
   .row:last-child {
     border-bottom: none;
   }
   .title {
     position: absolute;
-    left:-25px;
+    left:-$TITLE-HEIGHT;
     bottom:100%;
-    top:-26px;
-    height:25px;
-    padding-left:3px;
-    width: 150px;
+    top: calc($TITLE-HEIGHT + 1px);
+    height:$TITLE-HEIGHT;
+    padding:0 3px;
+    padding-bottom: 2px;
     z-index:5;
     font-weight: bold;
-    font-size:1.2em;
     background: green;
     border:1px solid var(--border-color);
-    // border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
   }
   .rotate {
     transform: rotate(90deg);
     transform-origin: 0 100%;
+  }
+  .overlay {
+    position: absolute;
+    left : 0;
+    top:0;
+    bottom:0;
+    z-index: 2;
+    background: red;
+    width : 200px;
+    display: none;
   }
 }
