@@ -11,6 +11,7 @@ import {ColorPickerModule} from './color-picker';
 import { PieChartComponent } from './pie-chart/pie-chart.component';
 import { FxwidgetComponent } from './fxwidget/fxwidget.component';
 import { FxWidgetHostComponent } from './fx-widget-host/fx-widget-host.component';
+import { HgridDemoComponent } from './hgrid-demo/hgrid-demo.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { FxWidgetHostComponent } from './fx-widget-host/fx-widget-host.component
     GridContentComponent,
     PieChartComponent,
     FxwidgetComponent,
-    FxWidgetHostComponent
+    FxWidgetHostComponent,
+    HgridDemoComponent
   ],
   imports: [
     BrowserModule,
