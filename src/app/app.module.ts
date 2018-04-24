@@ -12,6 +12,7 @@ import { PieChartComponent } from './pie-chart/pie-chart.component';
 import { FxwidgetComponent } from './fxwidget/fxwidget.component';
 import { FxWidgetHostComponent } from './fx-widget-host/fx-widget-host.component';
 import { HgridDemoComponent } from './hgrid-demo/hgrid-demo.component';
+import { SweepStakesLadderComponent } from './sweep-stakes-ladder/sweep-stakes-ladder.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { HgridDemoComponent } from './hgrid-demo/hgrid-demo.component';
     PieChartComponent,
     FxwidgetComponent,
     FxWidgetHostComponent,
-    HgridDemoComponent
+    HgridDemoComponent,
+    SweepStakesLadderComponent
   ],
   imports: [
     BrowserModule,
