@@ -5,3 +5,5 @@ interface NodeModule {
 }
 
 declare var fin : any;
+
+declare var SharedWorker : any;

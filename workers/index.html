@@ -4,27 +4,66 @@
 <head>
   <meta charset="utf-8">
   <title>Shared Workers</title>
+  <script>
+   debugger;
+   function code() {
+    let connections = 0; // count active connections
+    const ports = [];
+    self.addEventListener("connect", function (e) {
 
+      var port = e.ports[0];
+      connections++;
+      ports.push(port);
+      console.info('Logger Clients : ' + connections);
+      port.addEventListener("message", function (e) {
+        port.postMessage("Welcome to " + e.data + " (On port #" + connections + ")");
+      }, false);
+      port.start();
+    }, false);
+   }
+
+    // const blob = new Blob([
+    //   `let connections = 0; // count active connections
+    // self.addEventListener("connect", function (e) {
+    //   var port = e.ports[0];
+    //   connections++;
+    //   console.info('Logger Clients : ' + connections);
+    //   port.addEventListener("message", function (e) {
+    //     port.postMessage("Welcome to " + e.data + " (On port #" + connections + ")");
+    //   }, false);
+    //   port.start();
+    // }, false);`]);
+    // const url = URL.createObjectURL(blob, {type: 'application/javascript'});
+    const blob = new Blob(['('+code.toString() + ')();']);
+    const url = URL.createObjectURL(blob, {type: 'application/javascript'});
+    // const worker = new SharedWorker(url);
+    const worker = new SharedWorker('blob:http://localhost:8081/54a52f31-79e8-41c9-bec6-e4543be6b952');
+    worker.port.addEventListener("message", function (e) {
+      console.log(e.data);
+    }, false);
+    worker.port.start();
+    // post a message to the shared web worker
+    console.log("Calling the worker from script 1");
+    worker.port.postMessage("script-1");
+  </script>
 </head>
 
 <body>
 
   <h1>Shared Web Workers: Show And Tale</h1>
 
-    <article>
+  <article>
 
-      To create a shared web worker, you pass a JavaScript file name to a
+    To create a shared web worker, you pass a JavaScript file name to a new instance of the SharedWorker object:
 
-      new instance of the SharedWorker object:
+    <br/>var worker = new SharedWorker("jsworker.js");
 
-      <br/>var worker = new SharedWorker("jsworker.js");
+    <br/>
 
-      <br/>
+    <output id="result"></output>
 
-      <output id="result"></output>
-
-    </article>
-
+  </article>
+<!--
   <script>
     var worker = new SharedWorker('worker.js');
     worker.port.addEventListener("message", function (e) {
@@ -41,7 +80,7 @@
   <script>
     console.log("Calling the worker from script 2");
     worker.port.postMessage("script-2");
-  </script>
+  </script> -->
 
 </body>
 
